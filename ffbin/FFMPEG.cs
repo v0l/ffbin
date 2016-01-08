@@ -35,9 +35,16 @@ namespace ffbin
         private void CheckPath()
         {
             string path = Environment.GetEnvironmentVariable("Path", EnvironmentVariableTarget.User);
-            if (!path.Contains(BinDir))
+            if (path != null)
             {
-                Environment.SetEnvironmentVariable("Path", path.EndsWith(";") ? path + BinDir : path + ';' + BinDir, EnvironmentVariableTarget.User);
+                if (!path.Contains(BinDir))
+                {
+                    Environment.SetEnvironmentVariable("Path", path.EndsWith(";") ? path + BinDir : path + ';' + BinDir, EnvironmentVariableTarget.User);
+                }
+            }
+            else
+            {
+                Environment.SetEnvironmentVariable("Path", BinDir, EnvironmentVariableTarget.User);
             }
         }
 

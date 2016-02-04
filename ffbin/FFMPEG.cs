@@ -185,8 +185,15 @@ namespace ffbin
 
                 if (latest.ReleaseDate > current.ReleaseDate)
                 {
+                    //Show toast notification
+                    Notification.Send("Updating FFMPEG...");
                     DownloadStatic(latest);
                     UpdateCurrentVersion(latest);
+                    Notification.Send(string.Format("FFMPEG is up to date ({0})", latest.ReleaseDate.ToString("dd-MM-yyyy")));
+                }
+                else
+                {
+                    Notification.Send(string.Format("FFMPEG is up to date ({0})", latest.ReleaseDate.ToString("dd-MM-yyyy")));
                 }
             }
         }
